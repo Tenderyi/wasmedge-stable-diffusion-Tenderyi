@@ -24,9 +24,9 @@ curl -L -O https://huggingface.co/second-state/stable-diffusion-v-1-4-GGUF/resol
 ```
 
 ## Compile example file
-The compiled `.wasm` file located at `./target/wasm32-wasi/release/`, and named `wasmedge_stable_diffusion_example.wasm`
+The compiled `.wasm` file located at `./target/wasm32-wasip1/release/`, and named `wasmedge_stable_diffusion_example.wasm`
 ```Bash
-cargo build --target wasm32-wasi --release
+cargo build --target wasm32-wasip1 --release
 ```
 
 ## Run
@@ -35,7 +35,7 @@ It supports two mode: txt2img and img2img.
 ### txt2img
 Assume that the model `stable-diffusion-v-1-4-GGUF` is located in the models folder of the same directory as this project.
 ```Bash
-wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_example.wasm -m ../../models/stable-diffusion-v1-4-Q8_0.gguf -p "a lovely cat"
+wasmedge --dir .:. ./target/wasm32-wasip1/release/wasmedge_stable_diffusion_example.wasm -m ../../models/stable-diffusion-v1-4-Q8_0.gguf -p "a lovely cat"
 ```
 <p align="center">
   <img src="./assets/output.png" width="256x">
@@ -44,7 +44,7 @@ wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_exampl
 ### img2img
 - `./output.png` is the image generated from the above txt2img pipeline
 ```Bash
-wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_example.wasm --mode img2img -m ../../models/stable-diffusion-v1-4-Q8_0.gguf -p "cat with red eyes" -i ./output.png -o ./img2img_output.png
+wasmedge --dir .:. ./target/wasm32-wasip1/release/wasmedge_stable_diffusion_example.wasm --mode img2img -m ../../models/stable-diffusion-v1-4-Q8_0.gguf -p "cat with red eyes" -i ./output.png -o ./img2img_output.png
 ```
 <p align="center">
   <img src="./assets/output2.png" width="256x">
@@ -53,7 +53,7 @@ wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_exampl
 ### Convert
 - Stable Diffusion model: [sd-v1-4.ckpt](), which type is Q8_0.
 ```Bash
-wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_example.wasm  --mode convert -o stable-diffusion-v1-4-Q8_0_test.gguf -m ../../models/sd-v1-4.ckpt --type q8_0
+wasmedge --dir .:. ./target/wasm32-wasip1/release/wasmedge_stable_diffusion_example.wasm  --mode convert -o stable-diffusion-v1-4-Q8_0_test.gguf -m ../../models/sd-v1-4.ckpt --type q8_0
 ```
 If you want to use the converted model, please use `--type` to asign the type `Q8_0`.
 
@@ -67,7 +67,7 @@ curl -L -O https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1
 You can specify the directory where the lora weights are stored via `--lora-model-dir`.
 If not specified, the default is the current working directory.
 ```Bash
-wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_example.wasm \
+wasmedge --dir .:. ./target/wasm32-wasip1/release/wasmedge_stable_diffusion_example.wasm \
 --lora-model-dir ../../lora \
 --model ../../lora/v1-5-pruned-emaonly.safetensors \
 -p "a lovely cat<lora:marblesh:1>" \
@@ -80,7 +80,7 @@ The lora model `../../lora/sd_xl_base_1.0.safetensors` and vae model `../../lora
 
 ### img2img
 ```Bash
-wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_example.wasm \
+wasmedge --dir .:. ./target/wasm32-wasip1/release/wasmedge_stable_diffusion_example.wasm \
 -p "with blue eyes<lora:marblesh:1>" \
 --lora-model-dir ../../lora \
 --model ../../lora/v1-5-pruned-emaonly.safetensors \
@@ -93,7 +93,7 @@ wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_exampl
 
 ## Supported parameters
 ```
-usage: wasmedge --dir .:. ./target/wasm32-wasi/release/wasmedge_stable_diffusion_example.wasm [arguments]
+usage: wasmedge --dir .:. ./target/wasm32-wasip1/release/wasmedge_stable_diffusion_example.wasm [arguments]
 
 arguments:
   -M, --mode [MODEL]                 run mode (txt2img or img2img or convert, default: txt2img)
